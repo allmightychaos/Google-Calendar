@@ -31,10 +31,10 @@ def generate_ical():
 
     return cal.to_ical()
 
-@app.route('/api/workout_schedule')
+@app.route('/api/main')
 def workout_schedule():
     ical_data = generate_ical()
-    return Response(ical_data, mimetype='text/calendar', headers={'Content-Disposition': 'attachment; filename="workout_schedule.ics"'})
+    return Response(ical_data, mimetype='text/calendar', headers={'Content-Disposition': 'attachment; filename="workout.ics"'})
 
 if __name__ == "__main__":
     app.run()
