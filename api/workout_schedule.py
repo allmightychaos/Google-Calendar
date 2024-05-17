@@ -7,8 +7,14 @@ app = Flask(__name__)
 
 def generate_ical():
     WORKOUTS = [
-        "Legs", "Push", "Pull", "Rest", 
-        "Legs + Abs", "Chest + Back", "Shoulder + Arms", "Rest"
+        ("Legs", "wisteria"), 
+        ("Push", "sage"), 
+        ("Pull", "peacock"), 
+        ("Rest", "graphite"), 
+        ("Legs + Abs", "wisteria"), 
+        ("Chest + Back", "peacock"), 
+        ("Shoulder + Arms", "sage"), 
+        ("Rest", "graphite")
     ]
     
     cal = Calendar()
@@ -26,9 +32,10 @@ def generate_ical():
     event_end_time = time(7, 30)
 
     # Add workout events
-    for i, workout in enumerate(WORKOUTS):
+    for i, (workout, color) in enumerate(WORKOUTS):
         event = Event()
         event.add('summary', workout)
+        event.add('categories', [color])
         event_start = tz.localize(datetime.combine(start_date + timedelta(days=i), event_start_time))
         event_end = tz.localize(datetime.combine(start_date + timedelta(days=i), event_end_time))
         event.add('dtstart', event_start)
